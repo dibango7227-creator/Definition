@@ -8,22 +8,51 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname)); // Sert les fichiers statiques (index.html, style.css, etc.)
+
+// Logger simple pour le débogage
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
+// Route pour servir l'accueil explicitement (optionnel car express.static le fait déjà)
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 
 // Configuration FedaPay
-FedaPay.setApiKey(process.env.FEDAPAY_SECRET_KEY);
-FedaPay.setEnvironment(process.env.FEDAPAY_ENVIRONMENT); // 'sandbox' ou 'live'
+const SECRET_KEY = process.env.FEDAPAY_SECRET_KEY;
+const ENVIRONMENT = process.env.FEDAPAY_ENVIRONMENT || 'sandbox';
+
+if (!SECRET_KEY) {
+    console.error("❌ ERREUR : FEDAPAY_SECRET_KEY est manquante dans le fichier .env");
+} else {
+    FedaPay.setApiKey(SECRET_KEY);
+    FedaPay.setEnvironment(ENVIRONMENT);
+    console.log(`✅ FedaPay configuré en mode : ${ENVIRONMENT}`);
+}
 
 // Route pour créer une transaction (génère un token pour le frontend)
 app.post('/api/create-transaction', async (req, res) => {
     try {
         const { amount, description, clientName, clientEmail } = req.body;
 
+        if (!amount || amount < 100) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Le montant minimum pour FedaPay est de 100 XOF." 
+            });
+        }
+
+        console.log(`Initiation d'un paiement de ${amount} XOF pour ${clientName}`);
+
         // Création de la transaction FedaPay
         const transaction = await Transaction.create({
             description: description || "Paiement Food Fine",
-            amount: Math.round(amount), // Conversion USD vers XOF (1$ = 600 XOF approx), minimum 100 XOF requis
+            amount: Math.round(amount),
             currency: { iso: 'XOF' },
-            callback_url: req.body.callbackUrl || "https://definition-mu.vercel.app/?payment=success", // Dynamique ou par défaut
+            callback_url: req.body.callbackUrl || "https://definition-mu.vercel.app/?payment=success",
             customer: {
                 firstname: clientName || "Client",
                 lastname: "Food Fine",
@@ -34,6 +63,8 @@ app.post('/api/create-transaction', async (req, res) => {
         // Génération du token pour FedaCheckout
         const token = await transaction.generateToken();
 
+        console.log(`Lien de paiement généré avec succès : ${transaction.id}`);
+
         res.json({
             success: true,
             transactionId: transaction.id,
@@ -41,8 +72,12 @@ app.post('/api/create-transaction', async (req, res) => {
             url: token.url
         });
     } catch (error) {
-        console.error("Erreur lors de la création de la transaction:", error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error("❌ Erreur FedaPay :", error.message);
+        res.status(500).json({ 
+            success: false, 
+            message: "Erreur lors de la création de la transaction FedaPay. Vérifiez vos clés API.",
+            error: error.message 
+        });
     }
 });
 

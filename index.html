@@ -226,37 +226,37 @@
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3 data-i18n="sub1_name">Assiette Argent</h3>
-                <div class="price"><span>$</span>49<span data-i18n="per_mo">/mois</span></div>
+                <div class="price">4900 <span style="font-size: 1.2rem;">F</span><span data-i18n="per_mo">/mois</span></div>
                 <ul class="plan-features">
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub1_f1">5 livraisons gratuites</span></li>
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub1_f2">5% de réduction</span></li>
                 </ul>
-                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Argent', 49)" data-i18n="sub1_btn">Choisir Argent</button>
+                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Argent', 4900)" data-i18n="sub1_btn">Choisir Argent</button>
             </div>
             
             <div class="pricing-card popular">
                 <div class="popular-badge" data-i18n="sub_pop">Le plus populaire</div>
                 <h3 data-i18n="sub2_name">Assiette Or</h3>
-                <div class="price"><span>$</span>99<span data-i18n="per_mo">/mois</span></div>
+                <div class="price">9900 <span style="font-size: 1.2rem;">F</span><span data-i18n="per_mo">/mois</span></div>
                 <ul class="plan-features">
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f1">Livraison gratuite illimitée</span></li>
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f2">10% de réduction</span></li>
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f3">1 Dégustation Exclusive</span></li>
                 </ul>
-                <button class="btn-primary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Or', 99)">
+                <button class="btn-primary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Or', 9900)">
                     <span data-i18n="sub2_btn">Choisir Or</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
 
             <div class="pricing-card">
                 <h3 data-i18n="sub3_name">Assiette Platine</h3>
-                <div class="price"><span>$</span>199<span data-i18n="per_mo">/mois</span></div>
+                <div class="price">19900 <span style="font-size: 1.2rem;">F</span><span data-i18n="per_mo">/mois</span></div>
                 <ul class="plan-features">
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f1">Livraison gratuite illimitée</span></li>
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub3_f2">20% de réduction</span></li>
                     <li><i class="fa-solid fa-check"></i> <span data-i18n="sub3_f3">Menus Dégustation Hebdo</span></li>
                 </ul>
-                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Platine', 199)" data-i18n="sub3_btn">Choisir Platine</button>
+                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Platine', 19900)" data-i18n="sub3_btn">Choisir Platine</button>
             </div>
         </div>
     </section>
@@ -339,7 +339,7 @@
         </div>
         <form class="modal-form" onsubmit="event.preventDefault(); checkoutMobileMoney('sub');">
             <input type="email" placeholder="Email Address" required class="styled-input">
-            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="sub_modal_btn">S'abonner pour</span> $<span id="sub-plan-price">0</span><span data-i18n="per_mo">/mois</span></button>
+            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="sub_modal_btn">S'abonner pour</span> <span id="sub-plan-price">0</span> F<span data-i18n="per_mo">/mois</span></button>
         </form>
     </div>
 
@@ -365,11 +365,11 @@
             <select id="res-area" required class="styled-input" onchange="updateReservationPrice()">
                 <option value="" disabled selected data-i18n="res_area_def">Sélectionner la Zone</option>
                 <option value="0" data-name="Standard Dining" data-i18n="res_a1">Salle Standard (Gratuit)</option>
-                <option value="20" data-name="Window Seat" data-i18n="res_a2">Baie Vitrée (+ 20$)</option>
-                <option value="30" data-name="Sea View" data-i18n="res_a3">Près de la mer (+ 30$)</option>
-                <option value="50" data-name="VIP Lounge" data-i18n="res_a4">Espace VIP (+ 50$)</option>
+                <option value="2000" data-name="Window Seat" data-i18n="res_a2">Baie Vitrée (+ 2000 F)</option>
+                <option value="3000" data-name="Sea View" data-i18n="res_a3">Près de la mer (+ 3000 F)</option>
+                <option value="5000" data-name="VIP Lounge" data-i18n="res_a4">Espace VIP (+ 5000 F)</option>
             </select>
-            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="res_mod_btn">Procéder au paiement</span> ($<span id="res-price">0</span>)</button>
+            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="res_mod_btn">Procéder au paiement</span> (<span id="res-price">0</span> F)</button>
         </form>
     </div>
 

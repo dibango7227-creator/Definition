@@ -4,6 +4,9 @@ let cart = [];
 let requireDelivery = false;
 let currentLang = 'fr'; // default language
 
+// API Configuration
+const API_BASE_URL = window.location.origin;
+
 // Translations dictionary
 const translations = {
     fr: {
@@ -44,9 +47,9 @@ const translations = {
         per_mo: "/mois",
         footer_desc: "Nous offrons l'expérience culinaire la plus exquise. Élevez vos repas quotidiens avec notre service premium.",
         footer_links: "Liens Rapides", footer_contact: "Contact", footer_rights: "Tous droits réservés.",
-        cart_title: "Votre Panier", cart_del_opt: "Je veux être livré (+ 1 F)", cart_del_addr: "Votre adresse complète", cart_total: "Total", cart_pay: "Payer",
+        cart_title: "Votre Panier", cart_del_opt: "Je veux être livré (+ 500 F)", cart_del_addr: "Votre adresse complète", cart_total: "Total", cart_pay: "Payer",
         sub_modal_desc: "Complétez vos détails d'abonnement", sub_modal_btn: "S'abonner pour",
-        res_mod_title: "Réservation de Table", res_mod_desc: "Sélectionnez vos préférences pour un dîner parfait",
+        res_mod_title: "Table Reservation", res_mod_desc: "Sélectionnez vos préférences pour un dîner parfait",
         res_guest_def: "Nombre de Personnes", res_g1: "1 Personne", res_g2: "2 Personnes", res_g4: "4 Personnes", res_g6: "6+ Personnes",
         res_area_def: "Sélectionner la Zone", res_a1: "Salle Standard (Gratuit)", res_a2: "Baie Vitrée (+ 2000 F)", res_a3: "Près de la mer (+ 3000 F)", res_a4: "Espace VIP (+ 5000 F)",
         res_mod_btn: "Procéder au paiement",
@@ -89,7 +92,7 @@ const translations = {
         per_mo: "/mo",
         footer_desc: "We provide the most exquisite dining experience. Elevate your daily meals with our premium service.",
         footer_links: "Quick Links", footer_contact: "Contact Info", footer_rights: "All rights reserved.",
-        cart_title: "Your Cart", cart_del_opt: "I want delivery (+ 1 F)", cart_del_addr: "Full Delivery Address", cart_total: "Total", cart_pay: "Pay",
+        cart_title: "Your Cart", cart_del_opt: "I want delivery (+ 500 F)", cart_del_addr: "Full Delivery Address", cart_total: "Total", cart_pay: "Pay",
         sub_modal_desc: "Complete your subscription details", sub_modal_btn: "Subscribe for",
         res_mod_title: "Table Reservation", res_mod_desc: "Select your preferences for the perfect dining experience",
         res_guest_def: "Number of Guests", res_g1: "1 Person", res_g2: "2 People", res_g4: "4 People", res_g6: "6+ People",
@@ -279,7 +282,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // Notification WhatsApp via le backend
             const sendWhatsAppNotification = async () => {
                 try {
-'https://definition-production.up.railway.app/api/send-whatsapp', {
+                    await fetch(`${API_BASE_URL}/api/send-whatsapp`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -421,7 +424,7 @@ function renderCart() {
     }
     
     if (requireDelivery && cart.length > 0) {
-        total += 1;
+        total += 500;
     }
     totalEl.textContent = total + ' F';
 }
@@ -484,7 +487,7 @@ function checkoutMobileMoney(type) {
             }
             invoiceData.deliveryAddress = deliveryAddress;
             invoiceData.hasDeliveryFee = true;
-            total += 1;
+            total += 500;
         }
         checkoutTotal = total;
         
@@ -554,7 +557,7 @@ async function processPayment() {
     const callbackUrl = baseUrl + "?payment=success";
 
     try {
-const response = await fetch('https://definition-production.up.railway.app/api/create-transaction', {
+        const response = await fetch(`${API_BASE_URL}/api/create-transaction`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -565,18 +568,26 @@ const response = await fetch('https://definition-production.up.railway.app/api/c
             })
         });
 
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Erreur serveur");
+        }
+
         const data = await response.json();
 
         if (data.success && data.url) {
             // 3. Redirection directe vers la page de paiement sécurisée de FedaPay
+            console.log("Redirection vers FedaPay...", data.url);
             window.location.href = data.url;
         } else {
-            alert("Erreur lors de l'initialisation du paiement: " + (data.message || "URL introuvable"));
+            alert("Erreur FedaPay: " + (data.message || "URL de paiement non reçue."));
             closeModals();
         }
     } catch (error) {
-        console.error("Erreur serveur:", error);
-        alert("Erreur de connexion au serveur de paiement. Assurez-vous que le serveur Node (server.js) est lancé.");
+        console.error("Erreur détaillée:", error);
+        alert("❌ Impossible d'initialiser le paiement.\n\n" + 
+              "Détails : " + error.message + "\n\n" +
+              "Assurez-vous que votre serveur backend est bien lancé.");
         closeModals();
     }
 }
