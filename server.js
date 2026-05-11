@@ -23,7 +23,7 @@ app.post('/api/create-transaction', async (req, res) => {
             description: description || "Paiement Food Fine",
             amount: Math.round(amount), // Conversion USD vers XOF (1$ = 600 XOF approx), minimum 100 XOF requis
             currency: { iso: 'XOF' },
-            callback_url: req.body.callbackUrl || "http://localhost:8080/?payment=success", // Dynamique ou par défaut
+            callback_url: req.body.callbackUrl || "https://definition-mu.vercel.app/?payment=success", // Dynamique ou par défaut
             customer: {
                 firstname: clientName || "Client",
                 lastname: "Food Fine",
