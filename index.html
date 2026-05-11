@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Food Fine - Expérience Gastronomique</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flatpickr for styled calendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo" translate="no">
+            <span class="logo-text">Food</span><span class="logo-dot"> </span><span class="logo-text-dark">Fine</span>
+            <i class="fa-solid fa-utensils logo-icon"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active" data-i18n="nav_home">Accueil</a></li>
+            <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+            <li><a href="#delivery" data-i18n="nav_delivery">Livraison</a></li>
+            <li><a href="#reservation" data-i18n="nav_reservation">Réservation</a></li>
+            <li><a href="#subscriptions" data-i18n="nav_plans">Abonnements</a></li>
+        </ul>
+        <div class="nav-icons">
+            <!-- Language Switcher -->
+            <select id="language-switcher" class="lang-switch" onchange="changeLanguage(this.value)">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+            <div class="cart-icon" id="cart-icon-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge" id="cart-count">0</span>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="hero_title">
+                <span class="highlight">GOÛTEZ</span><br>
+                L'EXCELLENCE<br>
+                CHAQUE JOUR
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Vivez les meilleures créations culinaires livrées directement chez vous. Laissez-vous tenter par la gastronomie premium.
+            </p>
+            <button class="btn-primary hover-invert" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+                <span data-i18n="hero_btn">Commander</span> <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="assets/images/hero-dish.png" alt="Premium Meal" class="hero-image">
+            <div class="floating-leaf leaf-1"><i class="fa-solid fa-star"></i></div>
+            <div class="floating-leaf leaf-2"><i class="fa-solid fa-fire"></i></div>
+            <div class="floating-leaf leaf-3"><i class="fa-solid fa-heart"></i></div>
+        </div>
+    </section>
+
+    <!-- Special Dishes -->
+    <section id="menu" class="special-dishes">
+        <h2 class="section-title center" data-i18n="menu_title">Nos Plats Spéciaux</h2>
+        <div class="dishes-grid">
+            <div class="dish-card" data-id="d1" data-name="Saumon Grillé" data-price="200" data-img="assets/images/dish-salmon.png">
+                <div class="dish-img-container"><img src="assets/images/dish-salmon.png" alt="Grilled Salmon"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish1_name">Saumon Grillé</h4>
+                    <p data-i18n="dish1_desc">Saumon sauvage premium</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="dish-card" data-id="d2" data-name="Canard Yakitori" data-price="200" data-img="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Yakitori Duck"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish2_name">Canard Yakitori</h4>
+                    <p data-i18n="dish2_desc">Canard effiloché tendre</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="dish-card" data-id="d3" data-name="Bœuf Teriyaki" data-price="200" data-img="https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Teriyaki Beef"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish3_name">Bœuf Teriyaki</h4>
+                    <p data-i18n="dish3_desc">Avec riz blanc savoureux</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="dish-card" data-id="d4" data-name="Steak Wagyu" data-price="200" data-img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Wagyu Steak"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish4_name">Steak Wagyu</h4>
+                    <p data-i18n="dish4_desc">Wagyu grade A5 à la truffe</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="dish-card" data-id="d5" data-name="Pâtes aux Fruits de Mer" data-price="200" data-img="https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Seafood Pasta"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish5_name">Pâtes Fruits de Mer</h4>
+                    <p data-i18n="dish5_desc">Linguine fraîches au homard</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+            <div class="dish-card" data-id="d6" data-name="Risotto à la Truffe" data-price="200" data-img="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Truffle Risotto"></div>
+                <div class="dish-info">
+                    <h4 data-i18n="dish6_name">Risotto Truffe</h4>
+                    <p data-i18n="dish6_desc">Risotto crémeux, truffe noire</p>
+                    <div class="dish-bottom"><span class="price">200 F</span><button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button></div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Refreshments -->
+    <section class="special-dishes" style="padding-top: 20px; background-color: var(--bg-color);">
+        <h2 class="section-title center" data-i18n="ref_title">Rafraîchissements</h2>
+        <div class="dishes-grid">
+            <div class="dish-card" data-id="r1" data-name="Eau Minérale Premium" data-price="100" data-img="https://images.unsplash.com/photo-1620358814749-980b18868df3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container">
+                    <!-- Nice bottle of water image -->
+                    <img src="https://images.unsplash.com/photo-1620358814749-980b18868df3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Premium Water">
+                </div>
+                <div class="dish-info">
+                    <h4 data-i18n="ref1_name">Eau Minérale Premium</h4>
+                    <p data-i18n="ref1_desc">Bouteille en verre glacé</p>
+                    <div class="dish-bottom">
+                        <span class="price">100 F</span>
+                        <button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="dish-card" data-id="r2" data-name="Vin Rouge Prestige" data-price="100" data-img="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container">
+                    <!-- Elegant wine bottle and glass -->
+                    <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Red Wine Bottle">
+                </div>
+                <div class="dish-info">
+                    <h4 data-i18n="ref2_name">Vin Rouge Prestige</h4>
+                    <p data-i18n="ref2_desc">Cabernet Sauvignon Grand Cru</p>
+                    <div class="dish-bottom">
+                        <span class="price">100 F</span>
+                        <button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="dish-card" data-id="r3" data-name="Cocktail Signature" data-price="100" data-img="https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">
+                <div class="dish-img-container">
+                    <!-- Stylish cocktail glass -->
+                    <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Signature Cocktail">
+                </div>
+                <div class="dish-info">
+                    <h4 data-i18n="ref3_name">Cocktail Signature</h4>
+                    <p data-i18n="ref3_desc">Mixologie experte, agrumes frais</p>
+                    <div class="dish-bottom">
+                        <span class="price">100 F</span>
+                        <button class="add-btn add-to-cart-btn"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Service -->
+    <section id="delivery" class="features" style="background-color: var(--bg-color); padding: 100px 5%;">
+        <div class="features-left">
+            <h2 class="section-title" data-i18n="delivery_title">Service de Livraison<br>Premium</h2>
+            <p style="color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem; max-width: 450px;" data-i18n="delivery_desc">
+                Une expérience de restaurant gastronomique dans le confort de votre maison. Saisissez votre position ci-dessous pour trouver les points de repère sur la carte.
+            </p>
+            <div class="delivery-location" style="position: relative; display: flex; gap: 10px; margin-bottom: 40px; background: white; padding: 10px; border-radius: 50px; box-shadow: var(--shadow-sm); max-width: 450px;">
+                <div style="display: flex; align-items: center; padding-left: 15px; color: var(--primary-color);">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <input type="text" id="delivery-address-check" autocomplete="off" oninput="showSuggestions(this.value, 'home-suggestions')" placeholder="Entrez votre ville ou quartier..." data-i18n-placeholder="delivery_input" style="flex: 1; border: none; outline: none; font-size: 1rem; padding: 10px;" onkeyup="if(event.key === 'Enter') updateMap()">
+                <div id="home-suggestions" class="suggestions-box"></div>
+                <button class="btn-primary hover-invert" style="padding: 10px 20px;" onclick="updateMap()" data-i18n="delivery_btn">Vérifier</button>
+            </div>
+            <ul style="list-style: none; color: var(--text-color);">
+                <li style="margin-bottom: 15px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 10px;"></i> <span data-i18n="del_feat1">Emballage thermique contrôlé</span></li>
+                <li style="margin-bottom: 15px;"><i class="fa-solid fa-check" style="color: var(--primary-color); margin-right: 10px;"></i> <span data-i18n="del_feat2">Garantie de livraison en moins de 30 minutes</span></li>
+            </ul>
+        </div>
+        <div class="features-right">
+            <div style="position: relative; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; background: #ddd;">
+                <div id="map-loader" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.9); z-index: 10; justify-content: center; align-items: center; flex-direction: column;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    <p style="margin-top: 15px; font-weight: 600; color: var(--text-color);">Recherche en cours...</p>
+                </div>
+                <!-- Google Maps iframe -->
+                <iframe id="delivery-map" width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Cotonou&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table Reservation -->
+    <section id="reservation" class="reservation-section">
+        <div class="reservation-container">
+            <div class="reservation-content">
+                <h2 class="section-title" style="color: white;" data-i18n="res_title">Réserver une Table</h2>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px;" data-i18n="res_desc">Réservez votre place pour une expérience culinaire inoubliable chez Food Fine. Choisissez votre zone préférée.</p>
+                <button class="btn-primary hover-invert" style="background: white; color: var(--primary-color); padding: 15px 40px; font-size: 1.1rem; border: 2px solid white;" onclick="openReservationModal()">
+                    <span data-i18n="res_btn">Réserver Maintenant</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscriptions -->
+    <section id="subscriptions" class="subscriptions">
+        <h2 class="section-title center" data-i18n="sub_title">Abonnements Mensuels</h2>
+        <p class="section-subtitle center" data-i18n="sub_desc">Choisissez un plan adapté à votre style de vie. Profitez davantages exclusifs et de livraisons gratuites.</p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 data-i18n="sub1_name">Assiette Argent</h3>
+                <div class="price"><span>$</span>49<span data-i18n="per_mo">/mois</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub1_f1">5 livraisons gratuites</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub1_f2">5% de réduction</span></li>
+                </ul>
+                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Argent', 49)" data-i18n="sub1_btn">Choisir Argent</button>
+            </div>
+            
+            <div class="pricing-card popular">
+                <div class="popular-badge" data-i18n="sub_pop">Le plus populaire</div>
+                <h3 data-i18n="sub2_name">Assiette Or</h3>
+                <div class="price"><span>$</span>99<span data-i18n="per_mo">/mois</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f1">Livraison gratuite illimitée</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f2">10% de réduction</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f3">1 Dégustation Exclusive</span></li>
+                </ul>
+                <button class="btn-primary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Or', 99)">
+                    <span data-i18n="sub2_btn">Choisir Or</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 data-i18n="sub3_name">Assiette Platine</h3>
+                <div class="price"><span>$</span>199<span data-i18n="per_mo">/mois</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub2_f1">Livraison gratuite illimitée</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub3_f2">20% de réduction</span></li>
+                    <li><i class="fa-solid fa-check"></i> <span data-i18n="sub3_f3">Menus Dégustation Hebdo</span></li>
+                </ul>
+                <button class="btn-secondary w-100 hover-invert" onclick="openSubscriptionModal('Assiette Platine', 199)" data-i18n="sub3_btn">Choisir Platine</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo" translate="no">
+                    <span class="logo-text">Food</span><span class="logo-dot"> </span><span class="logo-text-dark">Fine</span>
+                    <i class="fa-solid fa-utensils logo-icon"></i>
+                </div>
+                <p data-i18n="footer_desc">Nous offrons l'expérience culinaire la plus exquise. Élevez vos repas quotidiens avec notre service premium.</p>
+            </div>
+            <div class="footer-links">
+                <h4 data-i18n="footer_links">Liens Rapides</h4>
+                <ul>
+                    <li><a href="#home" data-i18n="nav_home">Accueil</a></li>
+                    <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+                    <li><a href="#delivery" data-i18n="nav_delivery">Livraison</a></li>
+                    <li><a href="#subscriptions" data-i18n="nav_plans">Abonnements</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-i18n="footer_contact">Contact</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Cotonou, Littoral</p>
+                <p>
+                    <i class="fa-solid fa-phone"></i> +229 0150705194
+                    <a href="https://wa.me/2290150705194" target="_blank" style="color: #25D366; margin-left: 10px; font-size: 1.2rem; text-decoration: none;"><i class="fa-brands fa-whatsapp"></i></a>
+                </p>
+                <p><i class="fa-solid fa-envelope"></i> aimoneyhello@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Food Fine. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header">
+            <h3 data-i18n="cart_title">Votre Panier</h3>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Items injected by JS -->
+        </div>
+        
+        <!-- Delivery Option -->
+        <div style="margin-bottom: 20px; background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;">
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: 600;">
+                <input type="checkbox" id="require-delivery-cb" style="margin-right: 10px; width: 18px; height: 18px;" onchange="toggleCartDelivery()">
+                <span data-i18n="cart_del_opt">Je veux être livré (+ 500 F)</span>
+            </label>
+            <div id="cart-delivery-wrapper" style="display: none; margin-top: 15px; position: relative;">
+                <input type="text" id="checkout-delivery-address" autocomplete="off" oninput="showSuggestions(this.value, 'cart-suggestions')" placeholder="Votre adresse complète" data-i18n-placeholder="cart_del_addr" class="styled-input">
+                <div id="cart-suggestions" class="suggestions-box"></div>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total"><span data-i18n="cart_total">Total</span>: <span id="cart-total-price">0</span></div>
+            <button class="btn-primary w-100 hover-invert" onclick="checkoutMobileMoney('cart')" data-i18n="cart_pay">Payer</button>
+        </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div class="modal" id="sub-modal">
+        <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header text-center">
+            <div class="logo" translate="no" style="justify-content: center; margin-bottom: 20px;">
+                <span class="logo-text">Food</span><span class="logo-dot"> </span><span class="logo-text-dark">Fine</span>
+                <i class="fa-solid fa-utensils logo-icon"></i>
+            </div>
+            <h3 id="sub-plan-name">Plan Name</h3>
+            <p data-i18n="sub_modal_desc">Complétez vos détails d'abonnement</p>
+        </div>
+        <form class="modal-form" onsubmit="event.preventDefault(); checkoutMobileMoney('sub');">
+            <input type="email" placeholder="Email Address" required class="styled-input">
+            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="sub_modal_btn">S'abonner pour</span> $<span id="sub-plan-price">0</span><span data-i18n="per_mo">/mois</span></button>
+        </form>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div class="modal" id="reservation-modal">
+        <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header text-center">
+            <h3 data-i18n="res_mod_title">Réservation de Table</h3>
+            <p data-i18n="res_mod_desc">Sélectionnez vos préférences pour un dîner parfait</p>
+        </div>
+        <form class="modal-form" id="res-form" onsubmit="event.preventDefault(); checkoutMobileMoney('reservation');">
+            <div class="form-row" style="display: flex; gap: 10px;">
+                <input type="text" id="res-date" placeholder="Date" required class="styled-input date-picker" style="flex:1;">
+                <input type="text" id="res-time" placeholder="Heure" required class="styled-input time-picker" style="flex:1;">
+            </div>
+            <select id="res-guests" required class="styled-input">
+                <option value="" disabled selected data-i18n="res_guest_def">Nombre de Personnes</option>
+                <option value="1" data-i18n="res_g1">1 Personne</option>
+                <option value="2" data-i18n="res_g2">2 Personnes</option>
+                <option value="4" data-i18n="res_g4">4 Personnes</option>
+                <option value="6+" data-i18n="res_g6">6+ Personnes</option>
+            </select>
+            <select id="res-area" required class="styled-input" onchange="updateReservationPrice()">
+                <option value="" disabled selected data-i18n="res_area_def">Sélectionner la Zone</option>
+                <option value="0" data-name="Standard Dining" data-i18n="res_a1">Salle Standard (Gratuit)</option>
+                <option value="20" data-name="Window Seat" data-i18n="res_a2">Baie Vitrée (+ 20$)</option>
+                <option value="30" data-name="Sea View" data-i18n="res_a3">Près de la mer (+ 30$)</option>
+                <option value="50" data-name="VIP Lounge" data-i18n="res_a4">Espace VIP (+ 50$)</option>
+            </select>
+            <button type="submit" class="btn-primary w-100 hover-invert"><span data-i18n="res_mod_btn">Procéder au paiement</span> ($<span id="res-price">0</span>)</button>
+        </form>
+    </div>
+
+    <!-- Billing Details Modal -->
+    <div class="modal" id="momo-modal">
+        <button class="modal-close" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header text-center">
+            <h3>Détails de Facturation</h3>
+            <p>Entrez votre nom pour la facture</p>
+        </div>
+        <form class="modal-form" id="momo-form" onsubmit="event.preventDefault(); processPayment();">
+            <input type="text" id="momo-name" placeholder="Nom Complet" data-i18n-placeholder="momo_name" spellcheck="false" autocomplete="name" required class="styled-input">
+            <button type="submit" class="btn-primary w-100 hover-invert">Procéder au paiement (<span id="momo-total-price"></span>)</button>
+        </form>
+        <div id="momo-loading" style="display: none; text-align: center; padding: 20px;">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-color);"></i>
+            <p style="margin-top: 10px;" data-i18n="momo_load">Traitement en cours...</p>
+        </div>
+        <div id="momo-success" style="display: none; text-align: center; padding: 20px;">
+            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: var(--primary-color);"></i>
+            <h3 style="margin: 15px 0;" data-i18n="momo_succ">Paiement Réussi !</h3>
+            <div id="res-success-details" style="display:none; background: #f8f8f8; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: left;">
+                <p style="margin: 5px 0;"><strong data-i18n="inv_res_code">Code de Réservation :</strong> <span id="res-code" style="color: var(--primary-color); font-weight: bold;"></span></p>
+                <p style="margin: 5px 0;"><strong data-i18n="inv_res_table">Numéro de Table :</strong> <span id="res-table" style="color: var(--primary-color); font-weight: bold;"></span></p>
+            </div>
+            <button class="btn-primary hover-invert" onclick="downloadInvoice()" data-i18n="momo_dl">Télécharger Facture</button>
+        </div>
+    </div>
+
+    <!-- Hidden Printable Invoice -->
+    <div id="invoice-template" class="invoice-container print-only" translate="no">
+        <div class="invoice-header">
+            <div class="invoice-brand">
+                <div class="logo" translate="no">
+                    <span class="logo-text" style="color: #D90429; font-size: 2.5rem; font-weight: 800;">Food</span><span style="color: #1A1A1A; font-size: 2.5rem; font-weight: 800;">Fine</span>
+                    <i class="fa-solid fa-utensils" style="color: #D90429; font-size: 1.5rem;"></i>
+                </div>
+                <p>Cotonou, Littoral<br>Tel: +229 0150705194<br>Email: aimoneyhello@gmail.com</p>
+            </div>
+            <div class="invoice-details">
+                <h2 style="color: #D90429; font-size: 2.5rem; margin-bottom: 10px;" data-i18n="inv_title">FACTURE</h2>
+                <p><strong data-i18n="inv_date">Date :</strong> <span id="inv-date"></span></p>
+                <p><strong data-i18n="inv_num">Facture # :</strong> <span id="inv-number"></span></p>
+                <p><strong data-i18n="inv_method">Méthode de Paiement :</strong> Mobile Money</p>
+                <p><strong data-i18n="inv_status">Statut :</strong> <span style="color: #62B961; font-weight: bold;" data-i18n="inv_paid">PAYÉ</span></p>
+            </div>
+        </div>
+        <div style="margin-bottom: 30px; padding: 15px; background: #f8f8f8; border-left: 4px solid #D90429; position: relative;">
+            <p style="margin:0 0 5px 0; font-size: 1.1rem;"><strong data-i18n="inv_client">Nom du Client :</strong> <span id="inv-client-name"></span></p>
+            <p id="inv-delivery-p" style="margin:0; display:none;"><strong data-i18n="inv_del_addr">Adresse de Livraison :</strong> <span id="inv-delivery-addr"></span></p>
+            <div id="inv-res-details" style="display:none; margin-top:10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                <p style="margin:0;"><strong data-i18n="inv_res_code">Code de Réservation :</strong> <span id="inv-res-code"></span></p>
+                <p style="margin:0;"><strong data-i18n="inv_res_table">Numéro de Table :</strong> <span id="inv-res-table"></span></p>
+                <p style="margin:0;"><strong data-i18n="inv_res_date">Date & Heure :</strong> <span id="inv-res-datetime"></span></p>
+            </div>
+            <!-- QR Code container -->
+            <div id="invoice-qrcode" style="position: absolute; right: 15px; top: 15px; width: 80px; height: 80px;"></div>
+        </div>
+        <div class="invoice-body">
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left;" data-i18n="inv_desc">Description</th>
+                        <th style="text-align: right;" data-i18n="inv_amt">Montant</th>
+                    </tr>
+                </thead>
+                <tbody id="inv-items">
+                </tbody>
+            </table>
+            <div class="invoice-summary">
+                <div class="summary-row">
+                    <span data-i18n="inv_sub">Sous-total :</span>
+                    <span id="inv-subtotal"></span>
+                </div>
+                <!-- Optional Delivery Fee Row for Invoice -->
+                <div class="summary-row" id="inv-delivery-fee-row" style="display:none;">
+                    <span data-i18n="inv_del_fee">Frais de livraison :</span>
+                    <span>500 F</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (0%):</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span data-i18n="inv_tot">Total Payé :</span>
+                    <span id="inv-total"></span>
+                </div>
+            </div>
+        </div>
+        <div class="invoice-footer">
+            <p data-i18n="inv_thanks">Merci d'avoir dîné avec Food Fine !</p>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 5px;" data-i18n="inv_contact">Si vous avez des questions concernant cette facture, contactez contact@foodfine.com</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+    <script src="script.js?v=3"></script>
+</body>
+</html>
