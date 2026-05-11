@@ -279,7 +279,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // Notification WhatsApp via le backend
             const sendWhatsAppNotification = async () => {
                 try {
-                    await fetch('http://' + window.location.hostname + ':3000/api/send-whatsapp', {
+'https://definition-production.up.railway.app/api/send-whatsapp', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -554,7 +554,7 @@ async function processPayment() {
     const callbackUrl = baseUrl + "?payment=success";
 
     try {
-        const response = await fetch('http://' + window.location.hostname + ':3000/api/create-transaction', {
+const response = await fetch('https://definition-production.up.railway.app/api/create-transaction', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
